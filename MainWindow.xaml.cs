@@ -18,6 +18,7 @@ namespace BandDatabaser
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    /// git test nazdar
     public partial class MainWindow : Window
     {
         public MainWindow()
