@@ -1,0 +1,18 @@
+﻿<Page x:Class="BandDatabaser.LibraryPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BandDatabaser"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="550"
+      Title="LibraryPage">
+
+    <Grid SizeChanged="Grid_SizeChanged" >
+        <Label Content="Your library" Margin="70,10,333.4,0" VerticalAlignment="Top" Height="31" FontSize="16" FontWeight="Bold"/>
+        <TextBox x:Name="BandText" Height="23" Margin="174,18,176.4,0" MinWidth="200" MaxWidth="400" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.474"/>
+        <Button x:Name="SearchBtn" Margin="374,18,136.4,0" Width="40" Height="23" RenderTransformOrigin="0.5,0.422" VerticalAlignment="Top">
+                <Image Source="loupe.png" Stretch="Fill" Width="20" Height="20"></Image>
+        </Button>
+    </Grid>
+</Page>
