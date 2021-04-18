@@ -64,5 +64,63 @@ namespace BandDatabaser.Database
             db.BandAlbumSongs.InsertOnSubmit(newLink);
             db.SubmitChanges();
         }
+        public void RemoveBand(Guid idBand)
+        {
+            db.Bands.DeleteOnSubmit(db.Bands.Single(b => b.IdBand == idBand));
+            db.SubmitChanges();
+        }
+        public void RemoveAlbum(Guid idAlbum)
+        {
+            db.Albums.DeleteOnSubmit(db.Albums.Single(a => a.IdAlbum == idAlbum));
+            db.SubmitChanges();
+        }
+        public void RemoveSong(Guid idSong)
+        {
+            db.Songs.DeleteOnSubmit(db.Songs.Single(s => s.IdSong == idSong));
+            db.SubmitChanges();
+        }
+        public void RemoveLink(Guid idBand, Guid? idAlbum, Guid idSong)
+        {
+            db.BandAlbumSongs.DeleteOnSubmit(db.BandAlbumSongs.Single(l => (l.IdSong == idSong && l.IdAlbum == idAlbum && l.IdSong == idAlbum)));
+            db.SubmitChanges();
+        }
+        public List<Album> GetAlbumsForBand(Guid idBand)
+        {
+            return (from bas in db.BandAlbumSongs
+                    where bas.IdBand == idBand
+                    orderby bas.Album.ProductionYear descending
+                    group bas by bas.IdAlbum into b
+                    select b.First().Album)
+                    .ToList<Album>();
+        }
+        public List<Song> GetSongsForAlbum(Guid idAlbum)
+        {
+            return (from bas in db.BandAlbumSongs
+                    where bas.IdAlbum == idAlbum
+                    group bas by bas.IdSong into b
+                    select b.First().Song)
+                    .ToList<Song>();
+        }
+        public List<Band> GetBandsForKeyword(string keyword)
+        {
+            return (from b in db.Bands
+                    where b.BandName.ToLower().StartsWith(keyword.ToLower())
+                    orderby b.BandName ascending
+                    select b).ToList<Band>();
+        }
+        public List<Album> GetAlbumsForKeyword(string keyword)
+        {
+            return (from a in db.Albums
+                    where a.AlbumName.ToLower().StartsWith(keyword.ToLower())
+                    orderby a.AlbumName ascending
+                    select a).ToList<Album>();
+        }
+        public List<Song> GetSongsForKeyword(string keyword)
+        {
+            return (from s in db.Songs
+                    where s.SongName.ToLower().StartsWith(keyword.ToLower())
+                    orderby s.SongName ascending
+                    select s).ToList<Song>();
+        }
     }
 }
