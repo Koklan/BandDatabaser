@@ -18,7 +18,6 @@ namespace BandDatabaser
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    /// git test nazdar
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -30,6 +29,7 @@ namespace BandDatabaser
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new SearchPage();
+            Databaser.test();   //debug DELETE LATER
         }
 
         private void Library_Button_Click(object sender, RoutedEventArgs e)
