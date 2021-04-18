@@ -28,9 +28,9 @@
   <Table Name="dbo.BandAlbumSong" Member="BandAlbumSongs">
     <Type Name="BandAlbumSong">
       <Column Name="IdBand" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="IdAlbum" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdAlbum" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="IdSong" AutoSync="OnInsert" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Album_BandAlbumSong" Member="Album" ThisKey="IdAlbum" OtherKey="IdAlbum" Type="Album" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Album_BandAlbumSong" Member="Album" ThisKey="IdAlbum" OtherKey="IdAlbum" Type="Album" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Band_BandAlbumSong" Member="Band" ThisKey="IdBand" OtherKey="IdBand" Type="Band" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="Song_BandAlbumSong" Member="Song" ThisKey="IdSong" OtherKey="IdSong" Type="Song" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>

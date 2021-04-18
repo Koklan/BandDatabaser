@@ -15,9 +15,9 @@ PRIMARY KEY (IdAlbum))
 CREATE TABLE Song(IdSong UNIQUEIDENTIFIER default NEWID() NOT NULL, SongName varchar(50) NOT NULL,
 PRIMARY KEY (IdSong))
 
---Connecting table. Delete Entry on any reference deletion
-CREATE TABLE BandAlbumSong(IdBand UNIQUEIDENTIFIER NOT NULL, IdAlbum UNIQUEIDENTIFIER NOT NULL, IdSong UNIQUEIDENTIFIER NOT NULL,
-PRIMARY KEY (IdBand, IdAlbum, IdSong),
+--Connecting table. Delete Entry on any reference deletion. IdAlbum can be NULL for singles
+CREATE TABLE BandAlbumSong(IdBand UNIQUEIDENTIFIER NOT NULL, IdAlbum UNIQUEIDENTIFIER, IdSong UNIQUEIDENTIFIER NOT NULL,
+PRIMARY KEY (IdBand, IdSong),
 FOREIGN KEY (IdBand) REFERENCES Band(IdBand) ON DELETE CASCADE,
 FOREIGN KEY (IdAlbum) REFERENCES Album(IdAlbum) ON DELETE CASCADE,
 FOREIGN KEY (IdSong) REFERENCES Song(IdSong) ON DELETE CASCADE)

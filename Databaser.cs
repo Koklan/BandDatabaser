@@ -13,7 +13,10 @@ namespace BandDatabaser
         public static void test()
         {
             Database.DatabaseOperations datOp = new Database.DatabaseOperations();
-            Trace.WriteLine(datOp.AddBand("Alestorm"));
+            Guid bandGuid = datOp.AddBand("Alestorm");
+            Guid songGuid = datOp.AddSong("Shipwrecked");
+            Trace.WriteLine(bandGuid + "   "  + songGuid);
+            datOp.AddLink(bandGuid, null, songGuid);
         }
     }
 }

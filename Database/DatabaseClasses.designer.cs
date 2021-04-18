@@ -553,7 +553,7 @@ namespace BandDatabaser.Database
 		
 		private System.Guid _IdBand;
 		
-		private System.Guid _IdAlbum;
+		private System.Nullable<System.Guid> _IdAlbum;
 		
 		private System.Guid _IdSong;
 		
@@ -569,7 +569,7 @@ namespace BandDatabaser.Database
     partial void OnCreated();
     partial void OnIdBandChanging(System.Guid value);
     partial void OnIdBandChanged();
-    partial void OnIdAlbumChanging(System.Guid value);
+    partial void OnIdAlbumChanging(System.Nullable<System.Guid> value);
     partial void OnIdAlbumChanged();
     partial void OnIdSongChanging(System.Guid value);
     partial void OnIdSongChanged();
@@ -607,8 +607,8 @@ namespace BandDatabaser.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAlbum", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid IdAlbum
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAlbum", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> IdAlbum
 		{
 			get
 			{
@@ -655,7 +655,7 @@ namespace BandDatabaser.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Album_BandAlbumSong", Storage="_Album", ThisKey="IdAlbum", OtherKey="IdAlbum", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Album_BandAlbumSong", Storage="_Album", ThisKey="IdAlbum", OtherKey="IdAlbum", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Album Album
 		{
 			get
@@ -682,7 +682,7 @@ namespace BandDatabaser.Database
 					}
 					else
 					{
-						this._IdAlbum = default(System.Guid);
+						this._IdAlbum = default(Nullable<System.Guid>);
 					}
 					this.SendPropertyChanged("Album");
 				}

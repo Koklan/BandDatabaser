@@ -149,6 +149,10 @@
     <Content Include="Database\BandDatabase.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Database\BandDatabase_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>BandDatabase.mdf</DependentUpon>
+    </Content>
     <Content Include="Database\SQL scripts\CreateTables.sql" />
     <Content Include="Database\SQL scripts\DisplayDatabase.sql" />
     <Content Include="Database\SQL scripts\FillExample.sql" />

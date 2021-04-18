@@ -43,5 +43,26 @@ namespace BandDatabaser.Database
             db.SubmitChanges();
             return newSong.IdSong;
         }
+        public void AddLink(Guid idBand, Guid? idAlbum, Guid idSong)
+        {
+            if (!db.Bands.Any(b => b.IdBand == idBand))
+            {
+                throw new Exception("Band id not found");
+            }
+            if (idAlbum != null)
+            {
+                if (!db.Albums.Any(s => s.IdAlbum == idAlbum))
+                {
+                    throw new Exception("Album id not found");
+                }
+            }
+            if (!db.Songs.Any(s => s.IdSong == idSong))
+            {
+                throw new Exception("Song id not found");
+            }
+            BandAlbumSong newLink = new BandAlbumSong() { IdBand = idBand, IdAlbum = idAlbum, IdSong = idSong };
+            db.BandAlbumSongs.InsertOnSubmit(newLink);
+            db.SubmitChanges();
+        }
     }
 }
