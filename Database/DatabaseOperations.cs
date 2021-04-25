@@ -92,39 +92,36 @@ namespace BandDatabaser.Database
         }
         public IQueryable<Album> GetAlbumsForBand(Guid idBand)
         {
-            return (from bas in db.BandAlbumSongs
-                    where bas.IdBand == idBand
-                    orderby bas.Album.ProductionYear descending
-                    group bas by bas.IdAlbum into b
-                    select b.First().Album);
+            return db.BandAlbumSongs.Where(bas => bas.IdBand == idBand)
+                                    .OrderByDescending(bas => bas.Album.ProductionYear)
+                                    .GroupBy(bas => bas.IdAlbum)
+                                    .Select(bas => bas.First().Album);
+        }
+        public IQueryable<Song> GetSinglesForBand(Guid idBand)
+        {
+            return db.BandAlbumSongs.Where(bas => bas.IdBand == idBand && bas.IdAlbum == null)
+                                    .Select(bas => bas.Song);
         }
         public IQueryable<Song> GetSongsForAlbum(Guid idAlbum)
         {
-            return (from bas in db.BandAlbumSongs
-                    where bas.IdAlbum == idAlbum
-                    group bas by bas.IdSong into b
-                    select b.First().Song);
+            return db.BandAlbumSongs.Where(bas => bas.IdAlbum == idAlbum)
+                                    .GroupBy(bas => bas.IdSong)
+                                    .Select(bas => bas.First().Song);
         }
         public IQueryable<Band> GetBandsForKeyword(string keyword)
         {
-            return (from b in db.Bands
-                    where b.BandName.ToLower().StartsWith(keyword.ToLower())
-                    orderby b.BandName ascending
-                    select b);
+            return db.Bands.Where(b => b.BandName.ToLower().StartsWith(keyword.ToLower()))
+                           .OrderBy(b => b.BandName);
         }
         public IQueryable<Album> GetAlbumsForKeyword(string keyword)
         {
-            return (from a in db.Albums
-                    where a.AlbumName.ToLower().StartsWith(keyword.ToLower())
-                    orderby a.AlbumName ascending
-                    select a);
+            return db.Albums.Where(a => a.AlbumName.ToLower().StartsWith(keyword.ToLower()))
+                            .OrderBy(a => a.AlbumName);
         }
         public IQueryable<Song> GetSongsForKeyword(string keyword)
         {
-            return (from s in db.Songs
-                    where s.SongName.ToLower().StartsWith(keyword.ToLower())
-                    orderby s.SongName ascending
-                    select s);
+            return db.Songs.Where(s => s.SongName.ToLower().StartsWith(keyword.ToLower()))
+                           .OrderBy(s => s.SongName);
         }
         public void SaveToCSV(string filePath)
         {
