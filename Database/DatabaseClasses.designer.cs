@@ -30,12 +30,12 @@ namespace BandDatabaser.Database
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertAlbum(Album instance);
-    partial void UpdateAlbum(Album instance);
-    partial void DeleteAlbum(Album instance);
     partial void InsertSong(Song instance);
     partial void UpdateSong(Song instance);
     partial void DeleteSong(Song instance);
+    partial void InsertAlbum(Album instance);
+    partial void UpdateAlbum(Album instance);
+    partial void DeleteAlbum(Album instance);
     partial void InsertBand(Band instance);
     partial void UpdateBand(Band instance);
     partial void DeleteBand(Band instance);
@@ -74,19 +74,19 @@ namespace BandDatabaser.Database
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Album> Albums
-		{
-			get
-			{
-				return this.GetTable<Album>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Song> Songs
 		{
 			get
 			{
 				return this.GetTable<Song>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Album> Albums
+		{
+			get
+			{
+				return this.GetTable<Album>();
 			}
 		}
 		
@@ -104,6 +104,120 @@ namespace BandDatabaser.Database
 			{
 				return this.GetTable<BandAlbumSong>();
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Song")]
+	public partial class Song : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _IdSong;
+		
+		private string _SongName;
+		
+		private EntitySet<BandAlbumSong> _BandAlbumSongs;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdSongChanging(System.Guid value);
+    partial void OnIdSongChanged();
+    partial void OnSongNameChanging(string value);
+    partial void OnSongNameChanged();
+    #endregion
+		
+		public Song()
+		{
+			this._BandAlbumSongs = new EntitySet<BandAlbumSong>(new Action<BandAlbumSong>(this.attach_BandAlbumSongs), new Action<BandAlbumSong>(this.detach_BandAlbumSongs));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSong", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid IdSong
+		{
+			get
+			{
+				return this._IdSong;
+			}
+			set
+			{
+				if ((this._IdSong != value))
+				{
+					this.OnIdSongChanging(value);
+					this.SendPropertyChanging();
+					this._IdSong = value;
+					this.SendPropertyChanged("IdSong");
+					this.OnIdSongChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SongName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string SongName
+		{
+			get
+			{
+				return this._SongName;
+			}
+			set
+			{
+				if ((this._SongName != value))
+				{
+					this.OnSongNameChanging(value);
+					this.SendPropertyChanging();
+					this._SongName = value;
+					this.SendPropertyChanged("SongName");
+					this.OnSongNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Song_BandAlbumSong", Storage="_BandAlbumSongs", ThisKey="IdSong", OtherKey="IdSong")]
+		public EntitySet<BandAlbumSong> BandAlbumSongs
+		{
+			get
+			{
+				return this._BandAlbumSongs;
+			}
+			set
+			{
+				this._BandAlbumSongs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_BandAlbumSongs(BandAlbumSong entity)
+		{
+			this.SendPropertyChanging();
+			entity.Song = this;
+		}
+		
+		private void detach_BandAlbumSongs(BandAlbumSong entity)
+		{
+			this.SendPropertyChanging();
+			entity.Song = null;
 		}
 	}
 	
@@ -143,7 +257,7 @@ namespace BandDatabaser.Database
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAlbum", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAlbum", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
 		public System.Guid IdAlbum
 		{
 			get
@@ -269,120 +383,6 @@ namespace BandDatabaser.Database
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Song")]
-	public partial class Song : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _IdSong;
-		
-		private string _SongName;
-		
-		private EntitySet<BandAlbumSong> _BandAlbumSongs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdSongChanging(System.Guid value);
-    partial void OnIdSongChanged();
-    partial void OnSongNameChanging(string value);
-    partial void OnSongNameChanged();
-    #endregion
-		
-		public Song()
-		{
-			this._BandAlbumSongs = new EntitySet<BandAlbumSong>(new Action<BandAlbumSong>(this.attach_BandAlbumSongs), new Action<BandAlbumSong>(this.detach_BandAlbumSongs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdSong", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
-		public System.Guid IdSong
-		{
-			get
-			{
-				return this._IdSong;
-			}
-			set
-			{
-				if ((this._IdSong != value))
-				{
-					this.OnIdSongChanging(value);
-					this.SendPropertyChanging();
-					this._IdSong = value;
-					this.SendPropertyChanged("IdSong");
-					this.OnIdSongChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SongName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string SongName
-		{
-			get
-			{
-				return this._SongName;
-			}
-			set
-			{
-				if ((this._SongName != value))
-				{
-					this.OnSongNameChanging(value);
-					this.SendPropertyChanging();
-					this._SongName = value;
-					this.SendPropertyChanged("SongName");
-					this.OnSongNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Song_BandAlbumSong", Storage="_BandAlbumSongs", ThisKey="IdSong", OtherKey="IdSong")]
-		public EntitySet<BandAlbumSong> BandAlbumSongs
-		{
-			get
-			{
-				return this._BandAlbumSongs;
-			}
-			set
-			{
-				this._BandAlbumSongs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_BandAlbumSongs(BandAlbumSong entity)
-		{
-			this.SendPropertyChanging();
-			entity.Song = this;
-		}
-		
-		private void detach_BandAlbumSongs(BandAlbumSong entity)
-		{
-			this.SendPropertyChanging();
-			entity.Song = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Band")]
 	public partial class Band : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -419,7 +419,7 @@ namespace BandDatabaser.Database
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdBand", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdBand", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
 		public System.Guid IdBand
 		{
 			get
@@ -607,7 +607,7 @@ namespace BandDatabaser.Database
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAlbum", AutoSync=AutoSync.OnInsert, DbType="UniqueIdentifier")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IdAlbum", DbType="UniqueIdentifier")]
 		public System.Nullable<System.Guid> IdAlbum
 		{
 			get
