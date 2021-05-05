@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,23 +22,34 @@ namespace BandDatabaser
     public partial class MainWindow : Window
     {
         private Databaser databaser = new Databaser();
+        public string selectedBand;
+        Database.DatabaseOperations datOp = new Database.DatabaseOperations();
         public MainWindow()
         {
             InitializeComponent();
             MainFrame.Content = new LibraryPage();
         }
 
+        public void Band(string band)
+        {
+            selectedBand = band;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             databaser.Button((sender as Button).Content.ToString());
-            switch((sender as Button).Content.ToString())
+            switch ((sender as Button).Content.ToString())
             {
                 case "Export to CSV":
-                    MainFrame.Content = new BandAdittionPage();
+                    OpenFileDialog openFileDialogExport = new OpenFileDialog();
+                    openFileDialogExport.ShowDialog();
+                    datOp.SaveToCSV(openFileDialogExport.FileName);
                     break;
 
                 case "Import from CSV":
-
+                    OpenFileDialog openFileDialogImport = new OpenFileDialog();
+                    openFileDialogImport.ShowDialog();
+                    datOp.LoadFromCSV(openFileDialogImport.FileName);
                     break;
 
                 case "Add band":

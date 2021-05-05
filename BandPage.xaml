@@ -9,11 +9,16 @@
       Title="BandPage">
 
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="10,149,0,150.6" Width="52"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="488,149,0,150.6" Width="52"/>
-        <Label Content="Label" HorizontalAlignment="Left" Height="56" Margin="84,10,0,0" VerticalAlignment="Top" Width="267"/>
-        <ListBox HorizontalAlignment="Left" Height="193" Margin="84,71,0,0" VerticalAlignment="Top" Width="183"/>
-        <ListBox HorizontalAlignment="Left" Height="193" Margin="286,71,0,0" VerticalAlignment="Top" Width="183"/>
+        <Button x:Name="AddAlbumButton" Content="+" HorizontalAlignment="Left" Margin="84,0,0,9.6" Width="86" Click="AddAlbumButton_Click" Height="34" VerticalAlignment="Bottom"/>
+        <Button x:Name="AddSongButton" Content="+" HorizontalAlignment="Left" Margin="286,0,0,9.6" Width="86" Click="AddSongButton_Click" Height="34" VerticalAlignment="Bottom"/>
+        <Label x:Name="BandLabel" FontSize="24" Content="BandName" HorizontalAlignment="Left" Height="56" Margin="137,10,0,0" VerticalAlignment="Top" Width="267"/>
+        <ListBox x:Name="Albums" Margin="84,95,0,71.6" SelectionChanged="Albums_SelectionChanged" SourceUpdated="Albums_SourceUpdated" HorizontalAlignment="Left" Width="183"/>
+        <ListBox x:Name="Songs" HorizontalAlignment="Left" Margin="286,95,0,71.6" Width="183" SelectionChanged="Songs_SelectionChanged" SourceUpdated="Songs_SourceUpdated"/>
+        <TextBox x:Name="AlbumNameBox" HorizontalAlignment="Left" Margin="84,0,0,48.6" TextWrapping="Wrap" Text="AlbumName" Width="183" Height="18" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="SongNameBox" HorizontalAlignment="Left" Margin="286,0,0,48.6" TextWrapping="Wrap" Text="SongName" Width="183" Height="18" VerticalAlignment="Bottom"/>
+        <Button x:Name="RemoveAlbumButton" Content="-" HorizontalAlignment="Left" Margin="181,0,0,9.6" Width="86" Click="RemoveAlbumButton_Click" Height="34" VerticalAlignment="Bottom"/>
+        <Button x:Name="RemoveSongButton" Content="-" HorizontalAlignment="Left" Margin="383,0,0,9.6" Width="86" Click="RemoveSongButton_Click" Height="34" VerticalAlignment="Bottom"/>
+        <Label x:Name="FoundationYearLabel" Content="" HorizontalAlignment="Left" Height="24" Margin="84,66,0,0" VerticalAlignment="Top" Width="126"/>
 
     </Grid>
 </Page>

@@ -21,6 +21,14 @@ namespace BandDatabaser
     public partial class LibraryPage : Page
     {
         Database.DatabaseOperations datOp = new Database.DatabaseOperations();
+        private string selectedBand;
+
+        public string SelectedBand
+        {
+            get { return selectedBand ;}
+            set { selectedBand = value ;}
+        }    
+
         public LibraryPage()
         {
             InitializeComponent();
@@ -43,7 +51,22 @@ namespace BandDatabaser
         {
             if (BandsList.SelectedItem != null)
             {
+                SelectedBand = BandsList.SelectedItem.ToString();
+                //bandPage.Band((sender as ListBox).SelectedItem.ToString());
                 ((MainWindow)System.Windows.Application.Current.MainWindow).MainFrame.Content = new BandPage();
+            }
+        }
+
+        private void SearchBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(BandText.Text != null)
+            {
+                BandsList.Items.Clear();
+                List<Database.Band> bands = datOp.GetBandsForKeyword(BandText.Text).ToList();
+                foreach (var band in bands)
+                {
+                    BandsList.Items.Add(band.BandName);
+                }
             }
         }
     }

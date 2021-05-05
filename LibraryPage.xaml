@@ -11,13 +11,11 @@
     <Grid SizeChanged="Grid_SizeChanged" >
         <Label Content="Your library" Margin="70,10,333.4,0" VerticalAlignment="Top" Height="31" FontSize="16" FontWeight="Bold"/>
         <TextBox x:Name="BandText" Height="23" Margin="174,18,176.4,0" MinWidth="200" MaxWidth="400" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.474"/>
-        <Button x:Name="SearchBtn" Margin="374,18,136.4,0" Width="40" Height="23" RenderTransformOrigin="0.5,0.422" VerticalAlignment="Top">
+        <Button x:Name="SearchBtn" Margin="374,18,136.4,0" Width="40" Height="23" RenderTransformOrigin="0.5,0.422" VerticalAlignment="Top" Click="SearchBtn_Click">
             <Image Source="loupe.png" Stretch="Fill" Width="20" Height="20"></Image>
         </Button>
         <ListBox x:Name="BandsList" Margin="10,74,10.4,35.6" MouseDoubleClick="BandsList_MouseDoubleClick"/>
         <Label x:Name="NumBands" Content="Bands:" HorizontalAlignment="Left" Margin="10,0,0,4.6" VerticalAlignment="Bottom" Height="26" Width="181"/>
-        <Label Content="Albums:" HorizontalAlignment="Left" Margin="191,0,0,4.6" VerticalAlignment="Bottom" Height="26" Width="183"/>
-        <Label Content="Songs:" HorizontalAlignment="Left" Margin="374,0,0,4.6" Width="176" Height="26" VerticalAlignment="Bottom"/>
         <Label Content="Band name" HorizontalAlignment="Left" Height="26" Margin="9,43,0,0" VerticalAlignment="Top" Width="92"/>
     </Grid>
 </Page>
