@@ -28,15 +28,23 @@ namespace BandDatabaser
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if((BandNameBox.Text != null) && (0 < Int32.Parse(FoundationYearBox.Text)) && (Int32.Parse(FoundationYearBox.Text) < 5000))
+            try
             {
-                datOp.AddBand(BandNameBox.Text, Int32.Parse(FoundationYearBox.Text));
-                MessageBox.Show("Added to library!");
+                if((BandNameBox.Text != null) && (0 < Int32.Parse(FoundationYearBox.Text)) && (Int32.Parse(FoundationYearBox.Text) < 5000))
+                {
+                    datOp.AddBand(BandNameBox.Text, Int32.Parse(FoundationYearBox.Text));
+                    MessageBox.Show("Added to library!");
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Data");
+                }
             }
-            else
+            catch
             {
                 MessageBox.Show("Invalid Data");
             }
+
         }
     }
 }

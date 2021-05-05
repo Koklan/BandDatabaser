@@ -29,16 +29,23 @@ namespace BandDatabaser
             InitializeComponent();
             Songs.Items.Clear();
             Albums.Items.Clear();
-            LibraryPage libraryPage = new LibraryPage();
-            List<Database.Band> bands = datOp.GetBandsForKeyword(libraryPage.SelectedBand).ToList();
-            bandObj = bands[0];
-            BandLabel.Content = bandObj.BandName;
-            FoundationYearLabel.Content = "Foundation year:     " + bandObj.FoundationYear;
-            List<Database.Album> albums = datOp.GetAlbumsForBand(bandObj.IdBand).ToList();
-            foreach (var album in albums)
+            try
             {
-                Albums.Items.Add(album.AlbumName);
+                List<Database.Band> bands = datOp.GetBandsForKeyword(((MainWindow)System.Windows.Application.Current.MainWindow).SelectedBand).ToList();
+                bandObj = bands[0];
+                BandLabel.Content = bandObj.BandName;
+                FoundationYearLabel.Content = "Foundation year:     " + bandObj.FoundationYear.Value.Year;
+                List<Database.Album> albums = datOp.GetAlbumsForBand(bandObj.IdBand).ToList();
+                foreach (var album in albums)
+                {
+                    Albums.Items.Add(album.AlbumName);
+                }
             }
+            catch
+            {
+                bandObj = null;
+            }
+
         }
 
         //public void Band(string band)
@@ -55,35 +62,56 @@ namespace BandDatabaser
         //}
 
 
-        private void Albums_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (Albums.SelectedItem != null)
-            {
-                Songs.Items.Clear();
-                List<Database.Album> albums = datOp.GetAlbumsForKeyword(Albums.SelectedItem.ToString()).ToList();
-                albumObj = albums[0];
-                List<Database.Song> songs = datOp.GetSongsForAlbum(albumObj.IdAlbum).ToList();
-                foreach (var song in songs)
-                {
-                    Albums.Items.Add(song.SongName);
-                }
-            }
-        }
+        //private void Albums_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (Albums.SelectedItem != null)
+        //    {
+        //        Songs.Items.Clear();
+        //        List<Database.Album> albums = datOp.GetAlbumsForKeyword(Albums.SelectedItem.ToString()).ToList();
+        //        albumObj = albums[0];
+        //        List<Database.Song> songs = datOp.GetSongsForAlbum(albumObj.IdAlbum).ToList();
+        //        foreach (var song in songs)
+        //        {
+        //            Songs.Items.Add(song.SongName);
+        //        }
+        //    }
+        //}
 
         private void AddAlbumButton_Click(object sender, RoutedEventArgs e)
         {
             if (AlbumNameBox != null)
             {
+                Songs.Items.Clear();
                 datOp.AddAlbum(AlbumNameBox.Text);
-                Songs.ItemsSource = datOp.GetSongsForAlbum(albumObj.IdAlbum).ToList();
+                Songs.Items.Clear();
+                List<Database.Song> songs = datOp.GetSongsForAlbum(albumObj.IdAlbum).ToList();
+                Songs.Items.Clear();
+                foreach (var song in songs)
+                {
+                    Songs.Items.Add(song.SongName);
+                }
+                Albums.Items.Add(AlbumNameBox.Text);
+                
             }
+     
+
         }
 
         private void AddSongButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SongNameBox != null)
+            if (SongNameBox != null && Albums.SelectedItem != null)
             {
                 datOp.AddBandAlbumSong(bandObj.IdBand, albumObj.IdAlbum, datOp.AddSong(SongNameBox.Text));
+                Songs.Items.Clear();
+                List<Database.Song> songs = datOp.GetSongsForAlbum(albumObj.IdAlbum).ToList();
+                foreach (var song in songs)
+                {
+                    Songs.Items.Add(song.SongName);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Album not chosen or album name is empty.");
             }
         }
 
@@ -91,44 +119,71 @@ namespace BandDatabaser
         {
             if (Albums.SelectedItem != null)
             {
+                Albums.Items.Clear();
                 datOp.RemoveAlbum(albumObj.IdAlbum);
+                List<Database.Album> albums = datOp.GetAlbumsForBand(bandObj.IdBand).ToList();
+                foreach (var album in albums)
+                {
+                    Albums.Items.Add(album.AlbumName);
+                }
             }
         }
         private void RemoveSongButton_Click(object sender, RoutedEventArgs e)
         {
             if (Songs.SelectedItem != null)
             {
+                Songs.Items.Clear();
                 datOp.RemoveSong(songObj.IdSong);
+                List<Database.Song> songs = datOp.GetSongsForAlbum(albumObj.IdAlbum).ToList();
+                foreach (var song in songs)
+                {
+                    Songs.Items.Add(song.SongName);
+                }
             }
         }
 
         private void Songs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<Database.Song> songs = datOp.GetSongsForKeyword(Songs.SelectedItem.ToString()).ToList();
-            songObj = songs[0];
+            try
+            {
+                if(Songs.SelectedItem != null)
+                {
+                    List<Database.Song> songs = datOp.GetSongsForKeyword(Songs.SelectedItem.ToString()).ToList();
+                    songObj = songs[0];
+                }
+            }
+            catch
+            {
+                songObj = null;
+            }
         }
         private void Albums_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<Database.Album> albums = datOp.GetAlbumsForKeyword(Albums.SelectedItem.ToString()).ToList();
-            albumObj = albums[0];
-        }
-        
-        private void Albums_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            List<Database.Album> albums = datOp.GetAlbumsForBand(bandObj.IdBand).ToList();
-            foreach (var album in albums)
+            Songs.Items.Clear();
+            try
             {
-                Albums.Items.Add(album.AlbumName);
+                if (Albums.SelectedItem != null)
+                {
+                    List<Database.Album> albums = datOp.GetAlbumsForKeyword(Albums.SelectedItem.ToString()).ToList();
+                    albumObj = albums[0];
+                }
             }
-        }
-
-        private void Songs_SourceUpdated(object sender, DataTransferEventArgs e)
-        {
-            List<Database.Song> songs = datOp.GetSongsForAlbum(songObj.IdSong).ToList();
+            catch
+            {
+                albumObj = null;
+            }
+            List<Database.Song> songs = datOp.GetSongsForAlbum(albumObj.IdAlbum).ToList();
             foreach (var song in songs)
             {
                 Songs.Items.Add(song.SongName);
             }
+        }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            datOp.RemoveBand(bandObj.IdBand);
+            ((MainWindow)System.Windows.Application.Current.MainWindow).MainFrame.Content = new LibraryPage();
         }
     }
 }

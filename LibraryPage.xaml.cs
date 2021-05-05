@@ -21,13 +21,7 @@ namespace BandDatabaser
     public partial class LibraryPage : Page
     {
         Database.DatabaseOperations datOp = new Database.DatabaseOperations();
-        private string selectedBand;
 
-        public string SelectedBand
-        {
-            get { return selectedBand ;}
-            set { selectedBand = value ;}
-        }    
 
         public LibraryPage()
         {
@@ -51,8 +45,7 @@ namespace BandDatabaser
         {
             if (BandsList.SelectedItem != null)
             {
-                SelectedBand = BandsList.SelectedItem.ToString();
-                //bandPage.Band((sender as ListBox).SelectedItem.ToString());
+                ((MainWindow)System.Windows.Application.Current.MainWindow).Band((sender as ListBox).SelectedItem.ToString());
                 ((MainWindow)System.Windows.Application.Current.MainWindow).MainFrame.Content = new BandPage();
             }
         }

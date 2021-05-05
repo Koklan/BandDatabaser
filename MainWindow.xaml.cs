@@ -22,8 +22,14 @@ namespace BandDatabaser
     public partial class MainWindow : Window
     {
         private Databaser databaser = new Databaser();
-        public string selectedBand;
         Database.DatabaseOperations datOp = new Database.DatabaseOperations();
+        private string selectedBand;
+
+        public string SelectedBand
+        {
+            get { return selectedBand; }
+            set { selectedBand = value; }
+        }
         public MainWindow()
         {
             InitializeComponent();
