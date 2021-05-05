@@ -20,9 +20,16 @@ namespace BandDatabaser
     /// </summary>
     public partial class LibraryPage : Page
     {
+        Database.DatabaseOperations datOp = new Database.DatabaseOperations();
         public LibraryPage()
         {
             InitializeComponent();
+            List<Database.Band> bands = datOp.GetBandsForKeyword("").ToList();
+            foreach(var band in bands)
+            {
+                BandsList.Items.Add(band.BandName);
+            }
+            NumBands.Content = "Bands:  " + bands.Count();
         }
 
         private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -30,6 +37,14 @@ namespace BandDatabaser
             Thickness margin = SearchBtn.Margin;
             margin.Left = 174 + BandText.ActualWidth;
             SearchBtn.Margin = margin;
+        }
+
+        private void BandsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (BandsList.SelectedItem != null)
+            {
+                ((MainWindow)System.Windows.Application.Current.MainWindow).MainFrame.Content = new BandPage();
+            }
         }
     }
 }

@@ -7,9 +7,32 @@ using System.Diagnostics;
 
 namespace BandDatabaser
 {
-    public static class Databaser
+    class Databaser
     {
         //used for debug purposes for now, later will act as the link class between database and UI
+
+        public void Button(string value)
+        {
+            switch (value)
+            {
+                case "Export to CSV":
+
+                    break;
+
+
+                case "Import from CSV":
+
+                    break;
+
+                case "Add band":
+
+                    break;
+
+                case "My library":
+
+                    break;
+            }
+        }
         public static void test()
         {
             Database.DatabaseOperations datOp = new Database.DatabaseOperations();

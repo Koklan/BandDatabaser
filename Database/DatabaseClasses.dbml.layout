@@ -2,10 +2,10 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DatabaseClasses">
   <DataContextMoniker Name="/DatabaseClassesDataContext" />
   <nestedChildShapes>
-    <classShape Id="9d7d30a6-3291-4625-a469-e2f931d1298c" absoluteBounds="0.75, 5.5, 2, 1.1939925130208335">
+    <classShape Id="9d7d30a6-3291-4625-a469-e2f931d1298c" absoluteBounds="0.75, 5.75, 2, 1.1939925130208335">
       <DataClassMoniker Name="/DatabaseClassesDataContext/Song" />
       <nestedChildShapes>
-        <elementListCompartment Id="104e529c-a65e-4858-a6f9-fcb2974ef885" absoluteBounds="0.765, 5.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="104e529c-a65e-4858-a6f9-fcb2974ef885" absoluteBounds="0.765, 6.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="ff516908-f399-40f8-9f1b-8e8cb6502f75" absoluteBounds="0.75, 3.875, 2, 1.5785953776041666">
@@ -40,7 +40,7 @@
         <classShapeMoniker Id="d53c1e04-8868-4bec-b012-264357210ee6" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 6.09699625651042); (5.375 : 6.09699625651042); (5.375 : 5.3862939453125)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 6.34699625651042); (5.375 : 6.34699625651042); (5.375 : 5.3862939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DatabaseClassesDataContext/Song/Song_BandAlbumSong" />
       <nodes>
         <classShapeMoniker Id="9d7d30a6-3291-4625-a469-e2f931d1298c" />

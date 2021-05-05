@@ -18,9 +18,9 @@ namespace BandDatabaser
     /// <summary>
     /// Interaction logic for SearchPage.xaml
     /// </summary>
-    public partial class SearchPage : Page
+    public partial class BandAdittionPage : Page
     {
-        public SearchPage()
+        public BandAdittionPage()
         {
             InitializeComponent();
         }

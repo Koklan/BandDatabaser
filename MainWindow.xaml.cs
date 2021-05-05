@@ -20,21 +20,35 @@ namespace BandDatabaser
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Databaser databaser = new Databaser();
         public MainWindow()
         {
             InitializeComponent();
             MainFrame.Content = new LibraryPage();
         }
 
-        private void Search_Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new SearchPage();
-            Databaser.test();   //debug DELETE LATER
+            databaser.Button((sender as Button).Content.ToString());
+            switch((sender as Button).Content.ToString())
+            {
+                case "Export to CSV":
+                    MainFrame.Content = new BandAdittionPage();
+                    break;
+
+                case "Import from CSV":
+
+                    break;
+
+                case "Add band":
+                    MainFrame.Content = new BandAdittionPage();
+                    break;
+
+                case "My library":
+                    MainFrame.Content = new LibraryPage();
+                    break;
+            }
         }
 
-        private void Library_Button_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new LibraryPage();
-        }
     }
 }
