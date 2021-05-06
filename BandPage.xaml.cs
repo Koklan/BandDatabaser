@@ -45,6 +45,7 @@ namespace BandDatabaser
             {
                 bandObj = null;
             }
+            AlbumsLabel.Content = ("Albums:     " + Albums.Items.Count);
 
         }
 
@@ -91,7 +92,9 @@ namespace BandDatabaser
                     Songs.Items.Add(song.SongName);
                 }
                 Albums.Items.Add(AlbumNameBox.Text);
-                
+                Albums.SelectedIndex = Albums.Items.Count-1;
+                AlbumsLabel.Content = ("Albums:     " + Albums.Items.Count);
+                AlbumNameBox.Text = "AlbumName";
             }
      
 
@@ -108,6 +111,8 @@ namespace BandDatabaser
                 {
                     Songs.Items.Add(song.SongName);
                 }
+                SongsLabel.Content = ("Songs:     " + Songs.Items.Count);
+                SongNameBox.Text = "SongName";
             }
             else
             {
@@ -117,15 +122,13 @@ namespace BandDatabaser
 
         private void RemoveAlbumButton_Click(object sender, RoutedEventArgs e)
         {
+            Songs.Items.Clear();
             if (Albums.SelectedItem != null)
             {
-                Albums.Items.Clear();
                 datOp.RemoveAlbum(albumObj.IdAlbum);
-                List<Database.Album> albums = datOp.GetAlbumsForBand(bandObj.IdBand).ToList();
-                foreach (var album in albums)
-                {
-                    Albums.Items.Add(album.AlbumName);
-                }
+                Albums.Items.Remove(Albums.SelectedItem);
+                Albums.SelectedIndex = Albums.Items.Count - 1;
+                AlbumsLabel.Content = ("Albums:     " + Albums.Items.Count);
             }
         }
         private void RemoveSongButton_Click(object sender, RoutedEventArgs e)
@@ -177,6 +180,7 @@ namespace BandDatabaser
             {
                 Songs.Items.Add(song.SongName);
             }
+            SongsLabel.Content = ("Songs:     " + Songs.Items.Count);
         }
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e)
@@ -185,5 +189,32 @@ namespace BandDatabaser
             datOp.RemoveBand(bandObj.IdBand);
             ((MainWindow)System.Windows.Application.Current.MainWindow).MainFrame.Content = new LibraryPage();
         }
+
+        private void AlbumNameBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            AlbumNameBox.Text = string.Empty;
+        }
+
+        private void SongNameBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            SongNameBox.Text = string.Empty;
+        }
+
+        private void SongNameBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(SongNameBox.Text == "")
+            {
+                SongNameBox.Text = "SongName";
+            }
+        }
+
+        private void AlbumNameBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (AlbumNameBox.Text == "")
+            {
+                AlbumNameBox.Text = "AlbumName";
+            }
+        }
     }
 }
+

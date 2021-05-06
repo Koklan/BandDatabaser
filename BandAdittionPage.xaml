@@ -9,10 +9,10 @@
       Title="SearchPage">
 
     <Grid>
-        <TextBox x:Name="BandNameBox" Margin="129,10,0,0" TextWrapping="Wrap" Text="Band Name" RenderTransformOrigin="0.501,0.474" HorizontalAlignment="Left" Width="271" Height="23" VerticalAlignment="Top"/>
+        <TextBox x:Name="BandNameBox" Margin="129,10,0,0" TextWrapping="Wrap" Text="Band Name" RenderTransformOrigin="0.501,0.474" HorizontalAlignment="Left" Width="271" Height="23" VerticalAlignment="Top" GotFocus="BandNameBox_GotFocus" LostFocus="BandNameBox_LostFocus"/>
         <Button x:Name="AddButton" Content="Add to library" HorizontalAlignment="Left" Margin="405,10,0,0" VerticalAlignment="Top" Width="94" Height="23" RenderTransformOrigin="0.5,0.422" Click="AddButton_Click"/>
         <Label Content="Bandname:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="114"/>
-        <TextBox x:Name="FoundationYearBox" Margin="129,38,0,0" TextWrapping="Wrap" Text="Year" RenderTransformOrigin="0.501,0.474" HorizontalAlignment="Left" Width="271" Height="23" VerticalAlignment="Top" />
+        <TextBox x:Name="FoundationYearBox" Margin="129,38,0,0" TextWrapping="Wrap" Text="Year" RenderTransformOrigin="0.501,0.474" HorizontalAlignment="Left" Width="271" Height="23" VerticalAlignment="Top" GotFocus="FoundationYearBox_GotFocus" />
         <Label Content="Foundation year:" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="114"/>
     </Grid>
 </Page>

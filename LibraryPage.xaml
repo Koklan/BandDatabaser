@@ -10,7 +10,7 @@
 
     <Grid SizeChanged="Grid_SizeChanged" >
         <Label Content="Your library" Margin="70,10,333.4,0" VerticalAlignment="Top" Height="31" FontSize="16" FontWeight="Bold"/>
-        <TextBox x:Name="BandText" Height="23" Margin="174,18,176.4,0" MinWidth="200" MaxWidth="400" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.474"/>
+        <TextBox x:Name="BandText" Height="23" Margin="174,18,176.4,0" MinWidth="200" MaxWidth="400" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" RenderTransformOrigin="0.501,0.474" GotFocus="BandText_GotFocus" LostFocus="BandText_LostFocus"/>
         <Button x:Name="SearchBtn" Margin="374,18,136.4,0" Width="40" Height="23" RenderTransformOrigin="0.5,0.422" VerticalAlignment="Top" Click="SearchBtn_Click">
             <Image Source="loupe.png" Stretch="Fill" Width="20" Height="20"></Image>
         </Button>

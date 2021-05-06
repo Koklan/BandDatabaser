@@ -30,21 +30,64 @@ namespace BandDatabaser
         {
             try
             {
-                if((BandNameBox.Text != null) && (0 < Int32.Parse(FoundationYearBox.Text)) && (Int32.Parse(FoundationYearBox.Text) < 5000))
+                if((BandNameBox.Text != null))
                 {
-                    datOp.AddBand(BandNameBox.Text, Int32.Parse(FoundationYearBox.Text));
-                    MessageBox.Show("Added to library!");
+                    if((FoundationYearBox.Text != "Year") && (FoundationYearBox.Text != ""))
+                    {
+                        if((0 < Int32.Parse(FoundationYearBox.Text)) && (Int32.Parse(FoundationYearBox.Text) < 5000))
+                        {
+                            datOp.AddBand(BandNameBox.Text, Int32.Parse(FoundationYearBox.Text));
+                            MessageBox.Show("Added to library!", "Added");
+                        }
+                        else 
+                        { 
+                        datOp.AddBand(BandNameBox.Text);
+                        MessageBox.Show("Added to library!", "Added");
+                        }
+                    }
+                    else
+                    {
+                    datOp.AddBand(BandNameBox.Text);
+                    MessageBox.Show("Added to library!", "Added");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Data");
+                    MessageBox.Show("Invalid Data", "Data error");
                 }
             }
             catch
             {
-                MessageBox.Show("Invalid Data");
+                MessageBox.Show("Invalid Data", "Data error");
             }
 
+        }
+
+        private void BandNameBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            BandNameBox.Text = string.Empty;
+        }
+
+        private void FoundationYearBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            FoundationYearBox.Text = string.Empty;
+        }
+
+        private void BandNameBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(BandNameBox.Text == "")
+            {
+                BandNameBox.Text = "Bandname";
+            }
+
+        }
+
+        private void FoundationYearBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (FoundationYearBox.Text == "")
+            {
+                FoundationYearBox.Text = "Year";
+            }
         }
     }
 }

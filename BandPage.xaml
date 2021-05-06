@@ -11,15 +11,17 @@
     <Grid>
         <Button x:Name="AddAlbumButton" Content="+" HorizontalAlignment="Left" Margin="84,0,0,9.6" Width="86" Click="AddAlbumButton_Click" Height="34" VerticalAlignment="Bottom"/>
         <Button x:Name="AddSongButton" Content="+" HorizontalAlignment="Left" Margin="286,0,0,9.6" Width="86" Click="AddSongButton_Click" Height="34" VerticalAlignment="Bottom"/>
-        <Label x:Name="BandLabel" FontSize="24" Content="BandName" HorizontalAlignment="Left" Height="56" Margin="137,10,0,0" VerticalAlignment="Top" Width="267"/>
-        <ListBox x:Name="Albums" Margin="84,95,0,71.6" SelectionChanged="Albums_SelectionChanged"  HorizontalAlignment="Left" Width="183"/>
-        <ListBox x:Name="Songs" HorizontalAlignment="Left" Margin="286,95,0,71.6" Width="183" SelectionChanged="Songs_SelectionChanged"/>
-        <TextBox x:Name="AlbumNameBox" HorizontalAlignment="Left" Margin="84,0,0,48.6" TextWrapping="Wrap" Text="AlbumName" Width="183" Height="18" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="SongNameBox" HorizontalAlignment="Left" Margin="286,0,0,48.6" TextWrapping="Wrap" Text="SongName" Width="183" Height="18" VerticalAlignment="Bottom"/>
+        <Label x:Name="BandLabel" FontSize="24" Content="BandName" HorizontalAlignment="Left" Height="56" Margin="84,10,0,0" VerticalAlignment="Top" Width="267"/>
+        <ListBox x:Name="Albums" Margin="84,95,0,101.6" SelectionChanged="Albums_SelectionChanged"  HorizontalAlignment="Left" Width="183"/>
+        <ListBox x:Name="Songs" HorizontalAlignment="Left" Margin="286,95,0,101.6" Width="183" SelectionChanged="Songs_SelectionChanged"/>
+        <TextBox x:Name="AlbumNameBox" HorizontalAlignment="Left" Margin="84,0,0,48.6" TextWrapping="Wrap" Text="AlbumName" Width="183" Height="18" VerticalAlignment="Bottom" GotFocus="AlbumNameBox_GotFocus" LostFocus="AlbumNameBox_LostFocus"/>
+        <TextBox x:Name="SongNameBox" HorizontalAlignment="Left" Margin="286,0,0,48.6" TextWrapping="Wrap" Text="SongName" Width="183" Height="18" VerticalAlignment="Bottom" GotFocus="SongNameBox_GotFocus" LostFocus="SongNameBox_LostFocus"/>
         <Button x:Name="RemoveAlbumButton" Content="-" HorizontalAlignment="Left" Margin="181,0,0,9.6" Width="86" Click="RemoveAlbumButton_Click" Height="34" VerticalAlignment="Bottom"/>
         <Button x:Name="RemoveSongButton" Content="-" HorizontalAlignment="Left" Margin="383,0,0,9.6" Width="86" Click="RemoveSongButton_Click" Height="34" VerticalAlignment="Bottom"/>
         <Label x:Name="FoundationYearLabel" Content="" HorizontalAlignment="Left" Height="24" Margin="84,66,0,0" VerticalAlignment="Top" Width="240"/>
         <Button Content="Remove Band" HorizontalAlignment="Left" Margin="458,10,0,0" VerticalAlignment="Top" Width="82" Height="31" Click="RemoveButton_Click"/>
+        <Label x:Name="AlbumsLabel" Content="" HorizontalAlignment="Left" Margin="84,0,0,71.6" Width="183" Height="25" VerticalAlignment="Bottom"/>
+        <Label x:Name="SongsLabel" Content="" HorizontalAlignment="Left" Margin="286,0,0,71.6" Width="183" RenderTransformOrigin="0.514,0.261" Height="25" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Page>

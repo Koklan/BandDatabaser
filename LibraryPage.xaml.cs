@@ -62,5 +62,19 @@ namespace BandDatabaser
                 }
             }
         }
+
+        private void BandText_GotFocus(object sender, RoutedEventArgs e)
+        {
+            BandText.Text = string.Empty;
+        }
+
+
+        private void BandText_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if(BandText.Text == "")
+            {
+                BandText.Text = "Search";
+            }
+        }
     }
 }

@@ -33,7 +33,8 @@ namespace BandDatabaser
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Content = new LibraryPage();
+            LibraryPage libraryPage = new LibraryPage();
+            MainFrame.Content = libraryPage;
         }
 
         public void Band(string band)
@@ -47,15 +48,32 @@ namespace BandDatabaser
             switch ((sender as Button).Content.ToString())
             {
                 case "Export to CSV":
-                    OpenFileDialog openFileDialogExport = new OpenFileDialog();
-                    openFileDialogExport.ShowDialog();
-                    datOp.SaveToCSV(openFileDialogExport.FileName);
+                    SaveFileDialog saveFileDialogExport = new SaveFileDialog();
+                    saveFileDialogExport.ShowDialog();
+                    try
+                    {
+                        datOp.SaveToCSV(saveFileDialogExport.FileName + ".csv");
+                        MessageBox.Show("Database exported!","Export");
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Inavlid data!","Export error");
+                    }
                     break;
 
                 case "Import from CSV":
                     OpenFileDialog openFileDialogImport = new OpenFileDialog();
                     openFileDialogImport.ShowDialog();
-                    datOp.LoadFromCSV(openFileDialogImport.FileName);
+                    try
+                    {
+                        datOp.LoadFromCSV(openFileDialogImport.FileName);
+                        MessageBox.Show("Database imported!", "Import");
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Inavlid data!","Import error");
+                    }
+                    MainFrame.Content = new LibraryPage();
                     break;
 
                 case "Add band":
